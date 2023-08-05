@@ -3,7 +3,6 @@ from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 
-
 # Create your models here.
 class Tag(models.Model):
   value = models.TextField(max_length=100)
