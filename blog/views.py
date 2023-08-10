@@ -1,3 +1,4 @@
+import logging
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from blog.models import Post
@@ -5,6 +6,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from blog.forms import CommentForm
 
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 def index(request):
@@ -14,6 +16,10 @@ def index(request):
 def post_detail(request, slug):
   post = get_object_or_404(Post, slug=slug)
   return render(request, "blog/post-detail.html", {"post": post})
+  logger.info(
+    "Created comment on Post %d for user %s", post.pk, request.user
+)
+
 
 if request.user.is_active:
   if request.method == "POST":
@@ -32,3 +38,5 @@ else:
 return render(
     request, "blog/post-detail.html", {"post": post, "comment_form": comment_form}
 )
+
+logger.debug("Got %d posts", len(posts))
