@@ -198,11 +198,4 @@ class Prod(Dev):
 
   ALLOWED_HOSTS = values.ListValue(["localhost", "0.0.0.0", ".codio.io"])
 
-  DATABASES = {
-    'default': dj_database_url.config(default=f'sqlite:///{BASE_DIR}'),
-    "alternative": dj_database_url.config(
-        "ALTERNATIVE_DATABASE_URL",
-        default=f"sqlite:///{BASE_DIR}/alternative_db.sqlite3",
-    ),
-  }
 
