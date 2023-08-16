@@ -15,6 +15,7 @@ from pathlib import Path
 from configurations import Configuration
 from configurations import values
 import dj_database_url
+from blango_auth.models import User
 
 
 class Dev(Configuration):
@@ -193,6 +194,12 @@ class Dev(Configuration):
       'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
       'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
     ]
+
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+    ACCOUNT_ACTIVATION_DAYS = 7
+    
+
 
 
 

@@ -31,7 +31,7 @@ class BlangoUserManager(UserManager):
 
       return self._create_user(email, password, **extra_fields)
 
-# Create your models here.
+
 class User(AbstractUser):
     username = None
     email = models.EmailField(
