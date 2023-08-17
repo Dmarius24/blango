@@ -9,13 +9,15 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
 import os
 from pathlib import Path
 from configurations import Configuration
 from configurations import values
 import dj_database_url
+
+from django.contrib.auth.models import User
 from blango_auth.models import User
+
 
 
 class Dev(Configuration):
@@ -49,12 +51,18 @@ class Dev(Configuration):
         'django.contrib.contenttypes',
         'django.contrib.sessions',
         'django.contrib.messages',
+        'django.contrib.sites',
         'django.contrib.staticfiles',
+        'blango_auth.apps.BlangoAuthConfig',
         'blango_auth',
         'blog',
         'crispy_forms',
         'crispy_bootstrap5',
         'debug_toolbar',
+        'allauth',
+        'allauth.account',
+        'allauth.socialaccount',
+        'allauth.socialaccount.providers.google',
     ]
 
     MIDDLEWARE = [
@@ -186,7 +194,9 @@ class Dev(Configuration):
       },
       }
     
-    AUTH_USER_MODEL = "blango_auth.User"
+    APP_LABEL = 'blango_auth'
+    
+    AUTH_USER_MODEL = 'blango_auth.User'
 
     PASSWORD_HASHERS = [
       'django.contrib.auth.hashers.Argon2PasswordHasher',
@@ -198,6 +208,16 @@ class Dev(Configuration):
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
     ACCOUNT_ACTIVATION_DAYS = 7
+
+    SITE_ID = 1
+
+    ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+    ACCOUNT_EMAIL_REQUIRED = True
+    ACCOUNT_USERNAME_REQUIRED = False
+    ACCOUNT_AUTHENTICATION_METHOD = "email"
+    
+
+
     
 
 
