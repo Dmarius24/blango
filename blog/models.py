@@ -5,7 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 
 # Create your models here.
 class Tag(models.Model):
-  value = models.TextField(max_length=100)
+  value = models.TextField(max_length=100, unique=True)
 
   def __str__(self):
     return self.value
@@ -43,3 +43,4 @@ class AuthorProfile(models.Model):
 
   def __str__(self):
     return f"{self.__class__.__name__} object for {self.user}"
+
